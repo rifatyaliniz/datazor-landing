@@ -62,10 +62,34 @@
     <img class="logo" src="logo.png" alt="Datazor Logo">
     <h1>Veriye Güç Kat, Pazarın Lideri Ol</h1>
     <p>Trendyol ve e-ticaret satıcıları için yapay zekâ destekli rakip analizi ve satış zekâsı platformu.</p>
-  <form action="https://script.google.com/macros/s/AKfycbwKFD6C7ARxtWiq8SPsHC4yp_khiNmvKrYv33SD-s8UcZGH82ktFImpnjuHMQ1SWbZnIg/exec" method="POST">
+<form id="emailForm">
   <input type="email" name="email" required placeholder="E-posta adresin">
   <button type="submit">Erken Erişim Al</button>
-  </form>
+</form>
+
+<p id="message" style="margin-top:20px; color:#00FF90; font-weight:600;"></p>
+
+<script>
+  document.getElementById("emailForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const form = e.target;
+    const data = new FormData(form);
+
+    fetch("https://script.google.com/macros/s/AKfycbwKFD6C7ARxtWiq8SPsHC4yp_khiNmvKrYv33SD-s8UcZGH82ktFImpnjuHMQ1SWbZnIg/exec", {
+      method: "POST",
+      body: data
+    })
+    .then(response => response.text())
+    .then(result => {
+      document.getElementById("message").innerText = "E-posta başarıyla eklendi. Teşekkürler!";
+      form.reset();
+    })
+    .catch(error => {
+      document.getElementById("message").innerText = "Bir hata oluştu. Lütfen tekrar deneyin.";
+    });
+  });
+</script>
 
 
     <div class="footer">
